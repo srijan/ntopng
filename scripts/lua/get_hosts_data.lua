@@ -47,21 +47,23 @@ for key, value in pairs(hosts_stats) do
     postfix = string.format("0.%04u", num)
 
    --print("==>"..hosts_stats[key]["bytes.sent"].."[" .. sortColumn .. "]\n")
-   if(sortColumn == "column_ip") then
-      vals[key] = key
-   elseif(sortColumn == "column_name") then
-   vals[hosts_stats[key]["name"]] = key
-   elseif(sortColumn == "column_since") then
-   vals[hosts_stats[key]["duration"]] = key
-   elseif(sortColumn == "column_category") then
-   vals[hosts_stats[key]["category"]..postfix] = key
-   elseif(sortColumn == "column_asn") then
-   vals[hosts_stats[key]["asn"]] = key
-   elseif(sortColumn == "column_2") then
-   vals[hosts_stats[key]["bytes.sent"]+hosts_stats[key]["bytes.rcvd"]] = key
-else
-   vals[hosts_stats[key]["bytes.sent"]+hosts_stats[key]["bytes.rcvd"]] = key
-   end
+   if(hosts_stats[key]["localhost"] == true) then
+       if(sortColumn == "column_ip") then
+       vals[key] = key
+       elseif(sortColumn == "column_name") then
+       vals[hosts_stats[key]["name"]] = key
+       elseif(sortColumn == "column_since") then
+       vals[hosts_stats[key]["duration"]] = key
+       elseif(sortColumn == "column_category") then
+       vals[hosts_stats[key]["category"]..postfix] = key
+       elseif(sortColumn == "column_asn") then
+       vals[hosts_stats[key]["asn"]] = key
+       elseif(sortColumn == "column_2") then
+       vals[hosts_stats[key]["bytes.sent"]+hosts_stats[key]["bytes.rcvd"]] = key
+       else
+       vals[hosts_stats[key]["bytes.sent"]+hosts_stats[key]["bytes.rcvd"]] = key
+       end
+    end
 end
 
 table.sort(vals)

@@ -9,6 +9,7 @@
 	 $("#table-hosts").datatable({
 	   url: "/get_hosts_data.lua",
 	       showPagination: true,
+	       perPage: 30,
 	       title: "Hosts List",
 	        columns: [
 			     {
