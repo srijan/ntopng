@@ -980,9 +980,9 @@ void __redisSetError(redisContext *c, int type, const char *str) {
         memcpy(c->errstr,str,len);
         c->errstr[len] = '\0';
     } else {
-        /* Only REDIS_ERR_IO may lack a description! */
-        assert(type == REDIS_ERR_IO);
-        strerror_r(errno,c->errstr,sizeof(c->errstr));
+      /* Only REDIS_ERR_IO may lack a description! */
+      assert(type == REDIS_ERR_IO);
+      (void*)strerror_r(errno,c->errstr,sizeof(c->errstr));
     }
 }
 
